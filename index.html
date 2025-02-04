@@ -1,72 +1,244 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Filosofía en el Mundo</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Especial</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            background-color: #ffdde1;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #ff4d6d;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        .carousel {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* Define 7 columnas */
+            grid-template-rows: repeat(5, 1fr);    /* Define 6 filas */
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        /* Estilo 3D para las tarjetas */
+        .card {
+            width: 150px;
+            height: 200px;
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: static;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            transform-origin: center;
+        }
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card-front {
+            background-color: white;
+        }
+        .card-back {
+            background-color: #ff4d6d;
+            color: white;
+            font-size: 16px;
+            transform: rotateY(180deg);
+            padding: 10px;
+            text-align: center;
+        }
+        .card-front::before {
+            content: "Clic aquí"; /* Texto predeterminado */
+            position: absolute;
+            top: 10%; 
+            left: 25%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .card.flipped .card-front::before {
+            display: none;
+        }
+        .card-front img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        .card-back {
+            background-color: #ff4d6d;
+            color: white;
+            font-size: 16px;
+            transform: rotateY(180deg);
+            padding: 10px;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background-color: #ff4d6d;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #d93650;
+        }
+        .romantic-phrase {
+            grid-column: 4 / 5; /* Ubicación centralizada */
+            grid-row: 3 / 4;    /* Justo entre las imágenes 4 y 5 */
+            font-size: 20px;
+            color: #ff4d6d;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+        /* Posicionando las imágenes en forma de corazón */
+        .heart .card:nth-child(1) { grid-column: 4 / 5; grid-row: 1 / 2; }  /* Parte superior */
+        .heart .card:nth-child(2) { grid-column: 3 / 4; grid-row: 2 / 3; }  /* Lado izquierdo */
+        .heart .card:nth-child(3) { grid-column: 5 / 6; grid-row: 2 / 3; }  /* Lado derecho */
+        .heart .card:nth-child(4) { grid-column: 2 / 3; grid-row: 3 / 4; }  /* Inferior izquierdo */
+        .heart .card:nth-child(5) { grid-column: 4 / 5; grid-row: 3 / 4; }  /* Inferior izquierdo */
+        .heart .card:nth-child(6) { grid-column: 6 / 7; grid-row: 3 / 4; }  /* Inferior derecho */
+        .heart .card:nth-child(7) { grid-column: 3 / 4; grid-row: 4 / 5; }  /* Inferior izquierdo 2 */
+        .heart .card:nth-child(8) { grid-column: 5 / 6; grid-row: 4 / 5; }  /* Inferior derecho 2 */
+        .heart .card:nth-child(9) { grid-column: 4 / 5; grid-row: 5 / 6; }  /* Centro de abajo */
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background-color: #ff4d6d;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #d93650;
+        }
+
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Filosofía en el Mundo</h1>
-    <nav>
-      <a href="#editorial">Editorial</a>
-      <a href="#noticias">Noticias</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Sección Editorial -->
-    <section id="editorial" class="section">
-      <h2>Editorial</h2>
-      <p>
-        Bienvenidos a nuestro espacio de reflexión filosófica. Aquí exploramos las ideas que han moldeado el pensamiento humano y su impacto en el mundo actual.
-      </p>
-      <p>
-        Cada semana, compartiremos ensayos y artículos de filósofos clásicos y contemporáneos, conectando sus conceptos con los retos actuales.
-      </p>
-    </section>
-
-    <!-- Sección Noticias -->
-    <section id="noticias" class="section">
-      <h2>Noticias Resaltantes</h2>
-      <article class="noticia">
-        <h3><a href="https://www.abc.es/cultura/abci-etica-inteligencia-artificial-20240122.html" target="_blank">La Ética de la Inteligencia Artificial</a></h3>
-        <p>Expertos discuten cómo aplicar principios filosóficos a los dilemas éticos que plantea la inteligencia artificial.</p>
-      </article>
-      <article class="noticia">
-        <h3><a href="https://www.unesco.org/es/articles/filosofia-y-cambio-climatico-una-nueva-perspectiva" target="_blank">Filosofía y Cambio Climático</a></h3>
-        <p>Filósofos de todo el mundo se reúnen para analizar el papel de la filosofía en la lucha contra el cambio climático.</p>
-      </article>
-      <article class="noticia">
-        <h3><a href="https://www.elpais.com/cultura/la-filosofia-y-la-educacion-del-futuro-2024.html" target="_blank">La Filosofía y la Educación del Futuro</a></h3>
-        <p>Una mirada crítica sobre cómo la filosofía puede contribuir a los nuevos enfoques educativos del siglo XXI.</p>
-      </article>
-    </section>
-
-    <!-- Sección Contacto -->
-    <section id="contacto" class="section">
-      <h2>Contacto</h2>
-      <form>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        
-        <label for="email">Correo Electrónico:</label>
-        <input type="email" id="email" name="email" required>
-        
-        <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-        
-        <button type="submit">Enviar</button>
-      </form>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 Filosofía en el Mundo. Todos los derechos reservados.</p>
-    <p>Autor: José Gálvez, Docente a cargo</p>
-    <p>Conéctanos en <a href="https://www.facebook.com/Comers.es?mibextid=rS40aB7S9Ucbxw6v" target="_blank">Facebook</a></p>
-  </footer>
+    <div class="container">
+        <h1>NUESTROS MOMENTOS ❤️</h1>
+        <div class="carousel heart">
+            <div class="card" onclick="flipCard(this,0)">
+                <div class="card-inner">
+                    <div class="card-front"><img src="foto1.jpg" alt="Foto 1"></div>
+                    <div class="card-back">Cuando te vi sonreir esa noche, te convertiste en mi niña preciosa, 
+                        te miraba y en mi mente solo decía "Que hermosa chica" y ahora puedo decir Que hermosa mi chica.</div>
+                </div>
+            </div>
+            <div class="card" onclick="flipCard(this,0)">
+                <div class="card-inner">
+                    <div class="card-front"><img src="foto2.jpg" alt="Foto 2"></div>
+                    <div class="card-back">Solo me basta mirar tu carita, mirate que linda, tus ojitos son mi tesoro mi amor, 
+                        que esos ojitos nunca me falten ni para regañarme.</div>
+                </div>
+            </div>
+            <div class="card" onclick="flipCard(this,0)">
+                <div class="card-inner">
+                    <div class="card-front"><img src="foto3.jpg" alt="Foto 3"></div>
+                    <div class="card-back">12.10.2024 Una vez soñé con una chica que me abrazaba y me miraba con mucho amor, 
+                        ese sueño se siente igual cuando estoy contigo, no dudo en que seas la chica de mis sueños.</div>
+                </div>
+            </div>
+            <div class="card" onclick="flipCard(this,0)">
+                <div class="card-inner">
+                    <div class="card-front"><img src="foto6.jpg" alt="Foto 4"></div>
+                    <div class="card-back">Sin importar el lugar y las personas, soy tu fan número 1, admiro la gran mujer que eres
+                        admiro tu valentía, tu forma de pensar, tus gran sentido del humor, nadie es mejor que tu mi niña </div>
+                </div>
+            </div>
+            <div class="romantic-phrase">
+                <p>“El hecho de haberte conocido es el resultado de nuestras decisiones y de los caminos que elegimos recorrer.”</p>
+            </div>
+            <div class="card" onclick="flipCard(this,0)">
+                <div class="card-inner">
+                    <div class="card-front"><img src="fotoanillo.jpg" alt="Foto 5"></div>
+                    <div class="card-back">Ese anillo representa la promesa de estar juntos, de superar desafíos y de celebrar 
+                        cada instante como si fuera el último. Es un recordatorio mi amor por ti.</div>
+                </div>
+            </div>
+            <div class="card" onclick="flipCard(this,0)">
+                <div class="card-inner">
+                    <div class="card-front"><img src="fotocine.jpg" alt="Foto 6"></div>
+                    <div class="card-back">Mi amor, sin importar cuantos pendientes tenga o que tan cansado esté, siempre 
+                        voy a querer ir contigo a todos lados.</div>
+                </div>
+            </div>
+            <div class="card" onclick="flipCard(this,0)">
+                <div class="card-inner">
+                    <div class="card-front"><img src="fotocine2.jpg" alt="Foto 7"></div>
+                    <div class="card-back">Espero que no pienses que estoy loco, loco de amor por ti, sí, te amo mucho mi preciosa chica.
+                        Tu haces de mi un mejor hombre mi amor.</div>
+                </div>
+            </div>
+            <div class="card" onclick="flipCard(this,0)">
+                <div class="card-inner">
+                    <div class="card-front"><img src="fotodisco.jpg" alt="Foto 8"></div>
+                    <div class="card-back">¿Recuerdas la primera vez que bailamos? Siempre soñé con un momento así, me encantaría que seas mi pareja de baile para toda la vida ❤️ </div>
+                </div>
+            </div>
+        </div>
+        <p>*******************       Me gustaría que fueras mi primer San Valentín   **************************</p>
+        <p>¿Te gustaría?</p>
+        <p>******************************************************************************************************</p>
+        <p>******************************************************************************************************</p>
+        <a href="#" class="button" onclick="aceptarInvitacion()">Sí💕</a>
+        <a href="#" class="button" onclick="rechazarInvitacion()">No😊</a>
+        <p>******************************************************************************************************</p>
+        <p>******************************************************************************************************</p>
+    </div>
+    <script>
+        function flipCard(card) {
+            card.classList.toggle("flipped");
+        }
+    
+        function aceptarInvitacion() {
+            alert('Nos vemosssss mujer hermosa💖');
+        }
+    
+        function rechazarInvitacion() {
+            alert('Me caes mal mi amor 😢💕');
+        }
+    </script>
 </body>
 </html>
